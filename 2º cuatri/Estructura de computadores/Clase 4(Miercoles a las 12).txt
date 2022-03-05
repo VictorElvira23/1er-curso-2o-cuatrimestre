@@ -1,0 +1,181 @@
+
+
+	* OPERADORES CONDICIONALES EN MIPS
+
+	+ Branch on equal- beq $s1, $s2, L
+	
+	+ Branch on not equal- bne $s1, $s2, L
+
+	+ Set on less than- slt $s1, $s2, $s3
+
+	+ Set on less than nmediate- slt $s1,$s2, 100
+
+	(Saltos condicionales)
+	
+	* Jump- j 2500
+
+	* Jump register- jr $ra
+
+	* Jump and link- jal 2500 
+
+
+
+
+		lw $t1, ($s0)
+		lw $t2, ($s1)
+		lw $t3, ($s2)
+		lw $t4, ($s3)
+
+		beq $t1, $t2, ELSE
+		sub $s0, $t3, $t4
+
+		j EXIT
+
+	ELSE:
+		add $s0, $t3, $t4
+
+	EXIT:
+
+		sw $s0, ($s4)
+
+
+
+	(bucle)
+	
+		addi $t0, $zero, 0
+		addi $t1, $zero, 5
+	
+	PRINCIPIO: 
+	
+		bne $t0, $t1, CONDICION
+		j EXIT
+	
+	CONDICION:
+		
+		addi $t0, $t0, 1
+		j PRINCIPIO
+
+	EXIT:
+
+
+
+	(FUNCIONES)
+
+
+		
+	FUNCION:
+	
+		add $t0, $a0, $a1
+		add $t1, $a2, $a3	
+		
+		sub $s0, $t0, $t1
+
+		jr $ra	
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+(RANDOM)
+
+	En cada hueco de memoria hay 32 bits, solo pueden guardar hasta 255, 256 seria un 0
+	Al ponerle un valor mayor del que es capaz de guardar se produce el desbordamiento, cogiendo mas de lo que tiene.
+	(Posible pregunta de test)
+
+
+
+
+(Suma de los diez primeros numeros y almacenarlo en $v0)	
+
+	addi $t0, $zero, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+	addi $t0, $t0, 1
+
+	sb $v0, $t0
+	
+---------------------------------------------------------------------------------
+						|				|
+		addi $t0, $zero, 10		|	x = 10			|
+		addi $v0, $zero, 0 		|  	i = 0			|
+		addi $t1, $zero, 0		|	j = 0			|
+	BUCLE:					|				|
+						|				|
+		bne $t0, $v0, CONDICION		|	0 != 10 		|
+		j EXIT 				|				|
+						|				|
+	CONDICION:				|				|
+						| 	i = i + j (i = 0)	|
+		add $v0, $t0, $v0 		|	j = j + 1 (j = 1)	|
+		addi $t0, $t0, 1		|				|
+		j BUCLE				|	i = i + j (i = 1)	|
+	EXIT:					|	j = j + 1 (j = 2)	|
+						|				|
+						|	i = i + j (i = 3)	|
+						|	j = j + 1 (j = 3)	|
+---------------------------------------------------------------------------------------------------------
+													|
+													|
+(Calcula el numero de 1 que hay en un registro con valor 28, resultado en $v3)				|
+													|
+28 = 11100												|
+---------------------------------------------------------------------------------------------------------
+													|
+		addi $t0, $zero, 28									|
+		addi $t1, $zero, 0 									|
+		addi $t2, $zero, 5 (Valor de control con el numero de digitos del numero a examinar)	|
+		addi $v3, $zero, 0 (valor donde guardo el resultado)					|
+	BUCLE: 												|
+		beq $t0, $t2, EXIT									|
+		and $t4, $t1, 1										|
+		add $v3, $v3, $t4									|
+		srl $t1, $t1, 1										|
+		addi $t0, $t0, 1									|
+		j BUCLE											|
+	EXIT:												|
+													|
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
